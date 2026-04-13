@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# Data files (optional - prevent large uploads)
+data/
+*.csv
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
