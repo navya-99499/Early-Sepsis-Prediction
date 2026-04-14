@@ -1,114 +1,120 @@
-#  Early Sepsis Prediction using Machine Learning & Deep Learning
+# 🚨 Early Sepsis Prediction using Machine Learning & Deep Learning
 
-Predicting sepsis early in ICU patients is critical, as delayed detection can lead to severe complications and increased mortality.  
-This project develops and compares **Machine Learning (XGBoost)** and **Deep Learning (LSTM)** models to enable **early and accurate sepsis detection**.
-
----
-
-##  Problem Statement
-
-Sepsis is a **life-threatening condition** caused by the body’s extreme response to infection.  
-Traditional detection methods often identify sepsis **too late**, reducing treatment effectiveness.
-
- **Goal:**  
-Predict whether a patient will develop sepsis **hours in advance**, enabling timely medical intervention.
+Early detection of sepsis in ICU patients can **save lives**. Delays in diagnosis significantly increase mortality risk.  
+This project builds and compares **Machine Learning (XGBoost)** and **Deep Learning (LSTM)** models to enable **early, data-driven clinical decisions**.
 
 ---
 
-##  Dataset
+## 🧠 Problem Statement
 
-- **Source:** PhysioNet Challenge 2019 (ICU patient data)  
-- **Data Type:** Multivariate time-series  
+Sepsis is a **life-threatening condition** caused by the body’s extreme response to infection.
 
-**Features include:**
-- **Vital signs:** HR, BP, Temp, Respiration  
-- **Laboratory measurements:** WBC, Creatinine, Glucose, etc.  
-- **ICU stay information:** ICULOS  
+⚠️ Traditional systems often detect sepsis **too late**, limiting treatment effectiveness.
 
----
-
-##  Data Preprocessing
-
-- Handled missing values using:
-  - **Forward Fill (FFill)**
-  - **Backward Fill (BFill)**
-  - **Median Imputation**
-- Reconstructed **continuous hourly patient timelines**
-- Normalized features using **MinMaxScaler**
-
- Created:
-- **Tabular features (for XGBoost)**
-- **Sequential patient data (for LSTM)**
+🎯 **Goal:**  
+Predict sepsis **hours in advance** to enable **timely medical intervention and improved patient outcomes**.
 
 ---
 
-##  Models Implemented
+## 📊 Dataset
 
-###  XGBoost (Tabular Model)
+- 📍 **Source:** PhysioNet Challenge 2019 (ICU data)  
+- 📈 **Type:** Multivariate time-series  
 
-- Captures **non-linear relationships**
-- Works on **engineered tabular features**
-- Handles imbalanced data using `scale_pos_weight`
-
----
-
-###  LSTM (Time-Series Model)
-
-- Designed for **time-series data**
-- Learns **temporal progression of patient health**
-- Uses **padded patient sequences**
+### 🔎 Features:
+- ❤️ **Vital Signs:** HR, BP, Temp, Respiration  
+- 🧪 **Lab Measurements:** WBC, Creatinine, Glucose  
+- ⏱️ **ICU Info:** ICULOS (length of stay)
 
 ---
 
-##  Results
+## 🛠️ Data Preprocessing
 
-| Model   | Accuracy | Precision (Sepsis) | Recall (Sepsis) | F1 Score | ROC-AUC |
-|--------|----------|-------------------|-----------------|----------|--------|
-| **XGBoost** | 87% | 32% | 72% | 45% | **89.7%** |
-| **LSTM**    | 85% | 30% | **74%** | 43% | 87.0% |
+## Handled missing values using:
+- 🔄 Forward Fill (FFill)  
+- 🔁 Backward Fill (BFill)  
+- 📉 Median Imputation  
 
-### AUC - ROC Curve for XGBOOST Model:
+ Reconstructed **continuous hourly patient timelines**  
+ Normalized features using **MinMaxScaler**
 
-<img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/9a7a6272-5238-467a-88cd-7e075965013b" />
-
-### CONFUSION MATRIX for LSTM Model:
-
-<img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/584d43b2-280a-4e08-af48-115e0b0c5448" />
-
-
+📦 Created:
+- 📊 Tabular dataset → for XGBoost  
+- 🔗 Sequential data → for LSTM  
 
 ---
 
-##  Key Insights
+## 🤖 Models Implemented
 
-- **XGBoost** achieved higher overall performance (**ROC-AUC ~89.7%**)  
-- **LSTM** improved **recall**, detecting more sepsis cases  
-- Trade-off observed:
-  - Higher recall → **more false positives**
-  - Higher precision → **more missed cases**
+### 🌳 XGBoost (Tabular Model)
 
- In healthcare, **recall is critical**, as missing a sepsis case can be life-threatening.
+-  Captures **complex non-linear relationships**  
+-  Works on **engineered tabular features**  
+-  Handles imbalance using `scale_pos_weight`  
 
 ---
 
-##  Conclusion
+### 🔁 LSTM (Time-Series Model)
 
-- **XGBoost → strong baseline for tabular data**  
-- **LSTM → better temporal learning & sensitivity**  
-
- Combining both approaches provides a **robust and clinically meaningful solution**
-
+-  Designed for **sequential time-series data**  
+-  Learns **temporal progression of patient health**  
+-  Uses **padded patient sequences**  
 
 ---
 
-##  Tech Stack
+## 📈 Results
 
-- **Python**
-- **Pandas, NumPy**
-- **Scikit-learn**
-- **XGBoost**
-- **TensorFlow, Keras (LSTM)**
-- **Matplotlib, Seaborn**
+| Model        | Accuracy | Precision (Sepsis) | Recall (Sepsis) | F1 Score | ROC-AUC |
+|-------------|---------|--------------------|-----------------|----------|--------|
+| 🌳 **XGBoost** | 87%     | 32%                | 72%             | 45%      | 🟢 **89.7%** |
+| 🔁 **LSTM**    | 85%     | 30%                | 🔴 **74%**       | 43%      | 87.0% |
+
+---
+
+### 📉 AUC-ROC Curve (XGBoost)
+
+📊 Demonstrates strong classification performance with high separability.
+<img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/e9910d23-4714-4f93-aa33-dbda7cf523a4" />
+
+---
+
+### 📊 Confusion Matrix (LSTM)
+
+<img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/f3e4e4e7-ec75-4abc-bb09-c73bb3462de7" />
+
+🔍 Highlights improved **recall**, capturing more sepsis-positive cases.
+
+---
+
+## 💡 Key Insights
+
+ 🌳 **XGBoost** → Higher overall performance (**ROC-AUC ~89.7%**)  
+ 🔁 **LSTM** → Better **recall (74%)**, detects more sepsis cases  
+
+⚖️ **Trade-off Observed:**
+- 🔺 Higher recall → More false positives  
+- 🔻 Higher precision → More missed cases  
+
+🚑 In healthcare:  
+👉 **Recall is critical** → Missing a sepsis case can be life-threatening  
+
+---
+
+## 🧾 Conclusion
+
+- 🌳 **XGBoost** → Strong baseline for structured/tabular data  
+- 🔁 **LSTM** → Captures temporal patterns & improves sensitivity  
+
+---
+
+## ⚙️ Tech Stack
+
+-  Python  
+-  Pandas, NumPy  
+-  Scikit-learn  
+-  XGBoost  
+-  TensorFlow, Keras (LSTM)  
+-  Matplotlib, Seaborn  
 
 ---
 
@@ -133,6 +139,11 @@ Early_Sepsis_Prediction/
 
 ---
 
-##  Key Takeaway
 
-Combining **machine learning + deep learning** enables **early, data-driven healthcare decisions**, improving patient outcomes.
+## 🚀 Key Takeaway
+
+💡 Combining **Machine Learning + Deep Learning** enables:
+
+- ⏱️ **Early detection of critical conditions**  
+- 📊 **Data-driven healthcare decisions**  
+- ❤️ **Improved patient survival and outcomes**
